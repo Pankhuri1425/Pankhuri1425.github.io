@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Pankhuri Agrawal, Ira Harley, Jason Hofferle, Nikhil Patel">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>CS-5744 · Project 2</title>
+
+    <!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    
+	<!-- Custom styles -->
+	<link href="project2.css" rel="stylesheet">
+  </head>
+  <body class="d-flex flex-column h-100">
+    <header>
+	  <!-- Fixed navbar -->
+	  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+		<a class="navbar-brand" href="index.html">Delivery Drone - Test Plan</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+		  <ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+			  <a class="nav-link" href="builds.html">Integration Builds</a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" href="integration.html">Integration Tests</a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" href="validation.html">Validation Tests</a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" href="all.html">Full Test Plan</a>
+			</li>
+		  </ul>
+		</div>
+	  </nav>
+	</header>
+
+	<!-- Begin page content -->
+	<main role="main" class="flex-shrink-0">
+		<div class="container">
+			<h2 class="mt-3">Integration Builds</h2>
+			<div class="col py-2">
+				<p>The delivery drone system mainly consists of four modules: the <strong>feedback control system</strong> - the flight controls for air speed, altitude and direction; the <strong>sensors</strong> and other supporting components – for sensing the current state of the drone through its GPS, accelerometer, gyroscope, barometer, the internal memory, and transmitters; <strong>the control module</strong> – controls for the drone’s landing, take-off, directional control etc.; <strong>the drone object</strong> – which represents the physical components of the drone that enable the flying, carrying and delivering of packages. The integration testing will be performed on these modules.</p>
+			</div>
+			<div class="col py-2">
+				<p><strong>The sensor and other supporting components phase:</strong></p>
+				<p>The sensors used in the drone system should all work in perfect harmony and consistently. The accelerometer should be able to calculate the acceleration force acting on a drone correctly.  The component is used to determine the drone’s position in space and in monitoring its movement. Obtaining a correct accelerometer reading will also ensure a correct GPS reading.  The GPS is used to collect the next waypoint information and to determine when the drone arrives at the destination.  Upon reaching the destination, pre-landing instructions will be used to instruct the package carrier to release the package.</p>
+				<p>Barometers are sensors that measure air pressure. In drones, this air pressure information is used to determine the drone's altitude.  This information is useful while delivering, as the roofs of various destinations can be of varying altitude.  Knowing the correct location through GPS will help in correctly determining the altitude. The gyroscope measures the rate of rotation and helps to keep the drone balanced.  Maintaining the drone’s balance is an integral part of the whole drone delivery system.</p>
+				<p>Along with this, various other supporting components can be tested. This could include testing the system’s ability to monitor the battery level. Another could include testing the transmitter/receiver to ensure that it correctly and securely exchanges data from the central system and stores it in the internal storage.</p>
+				<p>Doing integration testing for all the sensors simultaneously would be a good idea, as most of the sensors are dependent on each other.  Doing so will ensure correct information exchange, which is important in various other phases.</p>
+			</div>
+			<div class="col py-2">
+				<p><strong>The drone module phase:</strong></p>
+				<p>This module consists of drone physical components like the engine, rotors, package carrying component etc. These components are responsible for navigating and carrying/delivering the package. All the of the components must receive information and react to it in real time. Any lag in receiving information or lag in reaction can lead to collisions with other drones, buildings or other objects in its path.  Other concerns include an increase in delivery time or even damage to the package.</p>
+				<p>Doing integration testing for these modules will ensure that the drone can perform a successful delivery.  The testing will also ensure that the drone can respond to instructions given by the control module. There might be several cases where two or more components should work together for the success of the system.  An example includes delivering the package.  During delivery, adjusting the altitude, adjusting the rotor direction and reducing the speed will be required to ensure the careful release of the package.</p>
+			</div>
+			<div class="col py-2">
+				<p><strong>The feedback control phase:</strong></p>
+				<p>The altitude, speed, and direction are three important control variables in the system. Each of them receives input from the sensors about the current state (speed, altitude and heading) of the drone.  This information is compared to the desired speed, altitude and direction provided by the control module. Based on this resulting comparison, necessary changes (feedback) are sent to the drone’s engine RPM and rotor tilt.</p>
+				<p>Testing all these components together will ensure correct navigation to the destination. For safe and accurate navigation, a Traffic collision avoidance system is used to ensure the drone has the correct data for height, speed and direction while the drone is travelling.</p>
+			</div>
+			<div class="col py-2">
+				<p><strong>The control module phase:</strong></p>
+				<p>This module plays a very important role in the whole system; it is essentially the heart of the system. Performing a thorough testing of this module with other modules would be a good idea. It collects the information from the transmitter/receiver and saves it to the internal memory. We should carefully check whether it can successfully gather information from the central system and from other components to communicate with the central system securely.</p>
+				<p>We should also check whether the system can take appropriate actions in case of an emergency (low battery for example). The module’s control over other components should also be tested.  This includes using the GPS location to provide waypoint formation, communicating with the central monitoring system to receive updated routing if current location exceeds defined deviation parameters, sending a release message to the package carrying module, and sending a landing message using the transmitter.</p>
+			</div>
+		</div>
+	</main>
+
+	<footer class="footer mt-auto py-3">
+	  <div class="container">
+		<p>
+			<a href="#">Back to top</a>
+		</p>
+		<span class="text-muted">&copy 2020 by Pankhuri Agrawal, Ira Harley, Jason Hofferle, Nikhil Patel</span>
+	  </div>
+	</footer>
+	
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+</body>
+</html>
